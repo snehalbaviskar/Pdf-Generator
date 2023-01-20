@@ -1,5 +1,13 @@
-module.exports = ({ name, price1, price2, receiptId }) => {
-    const today = new Date();
+module.exports = ({LineItemName,SKU,HSN_SAC,
+Qty,
+Rate,
+Discount,
+CGST_percentage,
+CGST_AMt,
+SGST_percentage,
+SGST_AMt,
+Amount }) => {
+  
 return `
     <!doctype html>
     <html>
@@ -80,51 +88,39 @@ return `
           </style>
        </head>
        <body>
-          <div class="invoice-box">
-             <table cellpadding="0" cellspacing="0">
-                <tr class="top">
-                   <td colspan="2">
-                      <table>
-                         <tr>
-                            <td class="title"><img  src="https://i2.wp.com/cleverlogos.co/wp-content/uploads/2018/05/reciepthound_1.jpg?fit=800%2C600&ssl=1"
-                               style="width:100%; max-width:156px;"></td>
-                            <td>
-                               Datum: ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}.`}
-                            </td>
-                         </tr>
-                      </table>
-                   </td>
-                </tr>
-                <tr class="information">
-                   <td colspan="2">
-                      <table>
-                         <tr>
-                            <td>
-                               Customer name: ${name}
-                            </td>
-                            <td>
-                               Receipt number: ${receiptId}
-                            </td>
-                         </tr>
-                      </table>
-                   </td>
-                </tr>
-                <tr class="heading">
-                   <td>Bought items:</td>
-                   <td>Price</td>
-                </tr>
-                <tr class="item">
-                   <td>First item:</td>
-                   <td>${price1}$</td>
-                </tr>
-                <tr class="item">
-                   <td>Second item:</td>
-                   <td>${price2}$</td>
-                </tr>
-             </table>
-             <br />
-             <h1 class="justify-center">Total price: ${parseInt(price1) + parseInt(price2)}$</h1>
-          </div>
+       <h2>Handlebars template to populate a table</h2>
+
+<h3>data</h3>
+<div id="data"></div>
+
+
+
+<!-- The script element is used to define the Handlebars template -->
+<script type="text/x-handlebars-template" id="tableTemplate">
+<table>
+<thead>
+  <tr>
+    {{#each array.[0]}}
+      <th>{{@key}}</th>
+    {{/each}}
+  </tr>
+</thead>
+<tbody>
+  {{#each array}}
+    <tr>
+    	{{#each this}}
+        <td>{{this}}</td>
+      {{/each}}
+    </tr>
+  {{/each}}
+</tbody>
+</table>
+</script>
+
+<div style="position: absolute;bottom: 5px;">
+Read about this Fiddle at: <a href="http://jsdev.wikidot.com/howto:12" target="_blank">How To: Handlebars - Create Table element</a>
+</div>
+       
        </body>
     </html>
     `;
